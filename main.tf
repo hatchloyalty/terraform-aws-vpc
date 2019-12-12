@@ -359,7 +359,7 @@ resource "aws_subnet" "database" {
 resource "aws_db_subnet_group" "database" {
   count = var.create_vpc && length(var.database_subnets) > 0 && var.create_database_subnet_group ? 1 : 0
 
-  name        = lower(var.name)
+  name        = var.database_subnet_group_name != null ? lower(var.database_subnet_group_name) : lower(var.name)
   description = "Database subnet group for ${var.name}"
   subnet_ids  = aws_subnet.database.*.id
 
@@ -443,7 +443,7 @@ resource "aws_subnet" "elasticache" {
 resource "aws_elasticache_subnet_group" "elasticache" {
   count = var.create_vpc && length(var.elasticache_subnets) > 0 && var.create_elasticache_subnet_group ? 1 : 0
 
-  name        = var.name
+  name        = var.elasticache_subnet_group_name != null ? lower(var.elasticache_subnet_group_name) : lower(var.name)
   description = "ElastiCache subnet group for ${var.name}"
   subnet_ids  = aws_subnet.elasticache.*.id
 }

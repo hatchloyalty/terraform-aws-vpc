@@ -10,6 +10,18 @@ variable "name" {
   default     = ""
 }
 
+variable "database_subnet_group_name" {
+  description = "Name to be used on DB Subnet Group resource as identifier"
+  type        = string
+  default     = null
+}
+
+variable "elasticache_subnet_group_name" {
+  description = "Name to be used on Elasticache Subnet Group resource as identifier"
+  type        = string
+  default     = null
+}
+
 variable "cidr" {
   description = "The CIDR block for the VPC. Default value is a valid CIDR, but not acceptable by AWS and should be overridden"
   type        = string
